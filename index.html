@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waqas Ahmed | AI & Flutter Developer</title>
+  <meta
+    name="description"
+    content="Portfolio of Waqas Ahmed – AI & Flutter Developer specializing in mobile and intelligent systems."
+  />
+  <meta
+    name="keywords"
+    content="Waqas Ahmed, AI Developer, Flutter Developer, Portfolio, Web Developer, Mobile Developer"
+  />
+  <meta name="author" content="Waqas Ahmed" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <style>
+    /* CSS Variables */
+    :root {
+      --primary: #0a2463;
+      --secondary: #3e92cc;
+      --accent: #ff715b;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #28a745;
+      --error: #dc3545;
+    }
+
+    /* Reset + Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Open Sans", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+    }
+
+    .btn-accent:hover {
+      background: #e05a44;
+    }
+
+    section {
+      padding: 5rem 0;
+      scroll-margin-top: 80px; /* adjusts for fixed header */
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    /* Alert Messages */
+    .alert {
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      color: white;
+      font-weight: 600;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .alert.show {
+      opacity: 1;
+    }
+
+    .alert-success {
+      background-color: var(--success);
+    }
+
+    .alert-error {
+      background-color: var(--error);
+    }
+
+    .alert i {
+      font-size: 1.2rem;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    /* Hero Section */
+    #hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+    }
+
+    .hero-content p {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* About Section */
+    #about {
+      background: white;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-img {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+
+    .about-text h3 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .education-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .education-item h4 {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Skills */
+    #skills {
+      background: var(--light);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    /* Projects */
+    #projects {
+      background: white;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--light);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-info {
+      padding: 1.5rem;
+    }
+
+    .project-info h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Experience */
+    #experience {
+      background: var(--light);
+    }
+
+    .experience-item {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .experience-item h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-item em {
+      display: block;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    /* Contact */
+    #contact {
+      background: white;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--secondary);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input,
+    textarea {
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      font-size: 1.5rem;
+      color: var(--primary);
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--secondary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: block;
+      }
+
+      .about-content,
+      .contact-container,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        flex-direction: column;
+        background: white;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+    }
+    .scroll-top {
+      position: fixed;
+      width: 50px;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary);
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.8rem 1rem;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: background 0.3s;
+    }
+
+    .scroll-top:hover {
+      background: var(--secondary);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Alert Messages -->
+  <div id="alertMessage" class="alert">
+    <i id="alertIcon"></i>
+    <span id="alertText"></span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Portfolio</div>
+        <ul class="nav-links">
+          <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+          <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
+          <li><a href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
+          <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container hero-content">
+      <h1>Hi, I'm Waqas Ahmed</h1>
+      <h2>Web Developer | AI & Flutter Developer</h2>
+      <p>
+        I build intelligent applications and seamless digital experiences with
+        a focus on AI, mobile development, and web technologies.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn">View My Work</a>
+        <a href="#contact" class="btn btn-accent">Hire Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-img">
+          <img src="about_img.JPG" alt="Waqas Ahmed" />
+        </div>
+        <div class="about-text">
+          <p>
+            I am a passionate BSCS student at The University of Lahore,
+            specializing in AI, mobile app development (Flutter), and web
+            technologies. My goal is to create innovative solutions that solve
+            real-world problems through intelligent systems.
+          </p>
+          <h3>Education</h3>
+          <div class="education-item">
+            <h4>BS Computer Science</h4>
+            <p>The University of Lahore, Sargodha Campus | 2022 – 2026</p>
+            <p>Specializing in AI, Mobile Development, and Database Systems</p>
+          </div>
+          <a href="WAQAS AHMED - EUROPIAN.pdf" target="_blank" class="btn">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Mobile Development</h3>
+          <p>Flutter, Dart, Android Studio, Firebase</p>
+        </div>
+        <div class="skill-card">
+          <h3>AI & Machine Learning</h3>
+          <p>Python, TensorFlow, CNN, Deep Learning</p>
+        </div>
+        <div class="skill-card">
+          <h3>Web Development</h3>
+          <p>HTML/CSS, JavaScript, CRUD Operations</p>
+        </div>
+        <div class="skill-card">
+          <h3>Tools & Design</h3>
+          <p>Git, Canva, Microsoft Office, Kaggle</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <!-- Project #1 -->
+        <div class="project-card">
+          <img
+            src="lungs.jpeg"
+            alt="Lungs Disease Prediction"
+            class="project-img"
+          />
+          <div class="project-info">
+            <h3>Lungs Disease Prediction (AI)</h3>
+            <p>
+              Hybrid CNN model (DenseNet + ResNet) achieving 70% accuracy on
+              Kaggle dataset of 3,549 lung images.
+            </p>
+            <div class="project-links">
+              <a href="LungsDisease.html" target="_blank" class="btn">Case Study</a>
+              <a href="https://github.com/waqasahmed5554/LungsDisease/tree/main" target="_blank" class="btn btn-accent">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project #2 -->
+        <div class="project-card">
+          <img
+            src="MAD.png"
+            alt="Fashion Resale App"
+            class="project-img"
+          />
+          <div class="project-info">
+            <h3>Pre‑Loved Fashion Resale App</h3>
+            <p>
+              Flutter-based mobile marketplace with Firebase authentication and
+              efficient GUI for buying/selling vintage fashion.
+            </p>
+            <div class="project-links">
+              <a href="MAD_Vid.html" target="_blank" class="btn">Live Demo</a>
+              <a href="https://drive.google.com/file/d/1-9J3VdU6FC0exYOS7jwkUVuV8PyUEymo/view?usp=drive_link" target="_blank" class="btn btn-accent">Source Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project #3 -->
+        <div class="project-card">
+          <img
+            src="eeg.jpg"
+            alt="Thought-to-Text"
+            class="project-img"
+          />
+          <div class="project-info">
+            <h3>Thought‑to‑Text Using EEG</h3>
+            <p>
+              Final Year Project: AI‑powered system converting brainwave data
+              into digital text with Flutter interface.
+            </p>
+            <div class="project-links">
+              <a href="Defence_Presentation.pdf" target="_blank" class="btn">Slides</a>
+              <button disabled>
+              <a href="#" class="btn btn-accent">Project Ongoing</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="experience-item">
+        <h3>Data Records Supervisor</h3>
+        <em>Saqiq Hospital, Sargodha | Aug 2020 – Jun 2023</em>
+        <ul>
+          <li>Managed patient data systems with 99.8% accuracy</li>
+          <li>Optimized record‑keeping workflows for 50+ daily cases</li>
+          <li>Implemented digital documentation solutions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-envelope contact-icon"></i>
+            <div><h4>Email</h4><p>waqasah652@gmail.com</p></div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone contact-icon"></i>
+            <div><h4>Phone</h4><p>+92 347 6421106</p></div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt contact-icon"></i>
+            <div><h4>Location</h4><p>50 NB, Sargodha, Pakistan</p></div>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/waqasahmed5554"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/waqas-ahmed-16a4b8278/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/rai_waqas123/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <form action="contact.php" method="POST" id="contactForm">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="text" name="subject" placeholder="Subject" />
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer><div class="container"><p>© 2025 Waqas Ahmed. All rights reserved.</p></div></footer>
+
+  <!-- Scroll to Top Button -->
+  <a href="#hero" class="scroll-top" id="scrollTopBtn" title="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <!-- JS for mobile menu -->
+  <script>
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.display = 'flex';
+      } else {
+        scrollTopBtn.style.display = 'none';
+      }
+    });
+
+    // Handle form submission and alerts
+    const contactForm = document.getElementById('contactForm');
+    const alertMessage = document.getElementById('alertMessage');
+    const alertIcon = document.getElementById('alertIcon');
+    const alertText = document.getElementById('alertText');
+
+    // Check URL for success/error parameters
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get('status');
+      const message = urlParams.get('message');
+
+      if (status && message) {
+        showAlert(status === 'success', message);
+      }
+    });
+
+    function showAlert(isSuccess, message) {
+      alertMessage.className = isSuccess ? 'alert alert-success show' : 'alert alert-error show';
+      alertIcon.className = isSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+      alertText.textContent = message;
+      
+      setTimeout(() => {
+        alertMessage.classList.remove('show');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
